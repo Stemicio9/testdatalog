@@ -12,8 +12,7 @@ public class TestController {
     @GetMapping("/test")
     public ResponseEntity<String> testLog(){
         for(int i=0;i<10; i++)
-            System.out.println("Ciao "+i);
+            System.out.println("simu gasati "+i);
         return ResponseEntity.ok("DONE");
     }
-
 }
