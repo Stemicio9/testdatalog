@@ -13,7 +13,7 @@ public class TestController {
     public ResponseEntity<String> testLog() {
         for(int i=0;i<10; i++){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10);
             }catch(Exception e){}
         }
         return ResponseEntity.ok("DONE");

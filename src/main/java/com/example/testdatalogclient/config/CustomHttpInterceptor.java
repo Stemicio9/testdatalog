@@ -1,34 +1,23 @@
 package com.example.testdatalogclient.config;
 
-import com.example.testdatalogclient.client.DatalogClient;
 import com.example.testdatalogclient.dataTransferObject.TraceableTime;
 import com.example.testdatalogclient.utilities.annotations.Traceable;
 import com.google.gson.Gson;
-import feign.Feign;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+
 import java.lang.annotation.Annotation;
 import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
-import java.lang.management.MemoryUsage;
-import java.lang.management.OperatingSystemMXBean;
+import com.sun.management.OperatingSystemMXBean;
 import java.lang.reflect.Method;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -60,11 +49,10 @@ public class CustomHttpInterceptor implements HandlerInterceptor {
                 execTime.setCpuUsage(cpuUsage);
             }
             if(t.memoryUsage()){
-                MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
-                MemoryUsage heapMemoryUsage = memoryBean.getHeapMemoryUsage();
-                MemoryUsage nonHeapMemoryUsage = memoryBean.getNonHeapMemoryUsage();
-                execTime.setHeapMemoryUsage(heapMemoryUsage.toString());
-                execTime.setNonHeapMemoryUsage(nonHeapMemoryUsage.toString());
+                OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+                double memoryUsage = osBean.getTotalMemorySize()-osBean.getFreeMemorySize();
+                execTime.setMemoryUsage(memoryUsage);
+
             }
             Gson gson = new Gson();
             HttpRequest request2 = HttpRequest.newBuilder().uri(uri).POST(HttpRequest.BodyPublishers.ofString(gson.toJson(execTime))).header("Content-Type", "application/json").build();
