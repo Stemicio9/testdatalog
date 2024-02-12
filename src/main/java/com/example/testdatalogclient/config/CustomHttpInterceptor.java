@@ -50,7 +50,7 @@ public class CustomHttpInterceptor implements HandlerInterceptor {
             }
             if(t.memoryUsage()){
                 OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-                double memoryUsage = osBean.getTotalMemorySize();
+                long memoryUsage = osBean.getTotalMemorySize();
                 execTime.setMemoryUsage(memoryUsage);
 
             }

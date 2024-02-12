@@ -15,7 +15,7 @@ public class TraceableTime {
     private long endTime;
     private String methodName;
     private double cpuUsage;
-    private double memoryUsage;
+    private long memoryUsage;
 
     public TraceableTime(long startTime, long endTime, String methodName){
         this.startTime=startTime;
