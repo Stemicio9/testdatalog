@@ -8,4 +8,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Traceable {
+    boolean cpuUsage () default true;
+    boolean memoryUsage() default true;
 }

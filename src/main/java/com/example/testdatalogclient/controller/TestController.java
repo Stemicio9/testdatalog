@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @Traceable
+    @Traceable()
     @GetMapping("/test")
-    public ResponseEntity<String> testLog(){
-        for(int i=0;i<10; i++)
-            System.out.println("simu gasati "+i);
+    public ResponseEntity<String> testLog() {
+        for(int i=0;i<10; i++){
+            try {
+                Thread.sleep(1000);
+            }catch(Exception e){}
+        }
         return ResponseEntity.ok("DONE");
     }
 }
