@@ -28,7 +28,7 @@ public class TestController {
             }
         }
         try {
-            LogItClient.log( TYPE.PLAIN,"d","entra");
+            LogItClient.log( TYPE.PLAIN,"d","entera");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
             try {
