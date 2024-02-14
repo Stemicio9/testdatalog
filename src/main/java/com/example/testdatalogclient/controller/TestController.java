@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
@@ -27,7 +29,16 @@ public class TestController {
         }
         try {
             LogItClient.log( TYPE.PLAIN,"d","entra");
-            LogItClient.clear("c",new Date());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+            try {
+                Date parsedDate = dateFormat.parse("2024-02-14 13:08:22.886");
+                System.out.println(parsedDate);
+                LogItClient.clear("d",parsedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
