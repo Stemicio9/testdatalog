@@ -44,7 +44,7 @@ public class LogItClient {
     }
 
     public static boolean clear(String category, Date data) throws URISyntaxException, IOException, InterruptedException {
-        URI uri = new URI("http://192.168.1.5x5:8081/clear/beforeData");
+        URI uri = new URI("http://192.168.1.55:8081/clear/beforeData");
         long d = data.getTime();
         ClearData cd = new ClearData(category,d);
         Gson gson = new Gson();
