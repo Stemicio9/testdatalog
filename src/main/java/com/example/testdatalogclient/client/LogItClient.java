@@ -1,6 +1,7 @@
 package com.example.testdatalogclient.client;
 
 
+import com.example.testdatalogclient.dataTransferObject.ClearData;
 import com.example.testdatalogclient.dataTransferObject.LogIt;
 import com.google.gson.Gson;
 
@@ -37,6 +38,17 @@ public class LogItClient {
         URI uri = new URI("http://192.168.1.55:8081/clear");
         Gson gson = new Gson();
         HttpRequest request = HttpRequest.newBuilder().uri(uri).POST(HttpRequest.BodyPublishers.ofString(gson.toJson(category))).header("Content-Type", "application/json").build();
+        HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
+        return true;
+    }
+
+    public static boolean clear(String category, Date data) throws URISyntaxException, IOException, InterruptedException {
+        URI uri = new URI("http://192.168.1.55:8081/clear/beforeData");
+        long d = data.getTime();
+        ClearData cd = new ClearData(category,d);
+        Gson gson = new Gson();
+        HttpRequest request = HttpRequest.newBuilder().uri(uri).POST(HttpRequest.BodyPublishers.ofString(gson.toJson(cd))).header("Content-Type", "application/json").build();
         HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
         return true;

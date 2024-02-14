@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Date;
 
 @RestController
 public class TestController {
@@ -25,7 +26,8 @@ public class TestController {
             }
         }
         try {
-            LogItClient.log( TYPE.PLAIN,"TEST_PLAIN_LOG","entra");
+            LogItClient.log( TYPE.PLAIN,"d","entra");
+            LogItClient.clear("c",new Date());
         } catch (Exception e) {
             e.printStackTrace();
         }
